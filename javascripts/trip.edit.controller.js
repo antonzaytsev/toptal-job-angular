@@ -1,10 +1,10 @@
 angular.module('app')
-.controller('tripEditController', function($scope, $http, $location, $routeParams, localStorageService) {
+.controller('tripEditController', function($scope, $http, $location, $routeParams, localStorageService, appConfig) {
   $scope.trip = {};
 
   $http({
     method: 'GET',
-    url: 'http://localhost:3000/api/trips/'+$routeParams.trip_id,
+    url: appConfig().endpoint+'/api/trips/'+$routeParams.trip_id,
     headers: {
       Authorization: 'Token token="'+localStorageService.get('token')+'", email="'+localStorageService.get('email')+'"'
     }
@@ -16,7 +16,7 @@ angular.module('app')
   $scope.updateTrip = function(){
     $http({
       method: 'PATCH',
-      url: 'http://localhost:3000/api/trips/'+$scope.trip.id,
+      url: appConfig().endpoint+'/api/trips/'+$scope.trip.id,
       headers: {
         Authorization: 'Token token="'+localStorageService.get('token')+'", email="'+localStorageService.get('email')+'"'
       },

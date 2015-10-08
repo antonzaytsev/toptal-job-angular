@@ -1,10 +1,10 @@
 angular.module('app')
-.controller('userEditController', function($scope, $http, $location, $routeParams, localStorageService){
+.controller('userEditController', function($scope, $http, $location, $routeParams, localStorageService, appConfig){
   $scope.user = {};
 
   $http({
     method: 'GET',
-    url: 'http://localhost:3000/api/users/'+$routeParams.user_id,
+    url: appConfig().endpoint+'/api/users/'+$routeParams.user_id,
     headers: {
       Authorization: 'Token token="'+localStorageService.get('token')+'", email="'+localStorageService.get('email')+'"'
     }
@@ -23,7 +23,7 @@ angular.module('app')
   $scope.updateUser = function(){
     $http({
       method: 'PATCH',
-      url: 'http://localhost:3000/api/users/'+$scope.user.id,
+      url: appConfig().endpoint+'/api/users/'+$scope.user.id,
       headers: {
         Authorization: 'Token token="'+localStorageService.get('token')+'", email="'+localStorageService.get('email')+'"'
       },

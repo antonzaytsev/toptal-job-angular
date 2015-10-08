@@ -1,11 +1,11 @@
 angular.module('app')
-.controller('usersController', function($scope, $http, $location, localStorageService){
+.controller('usersController', function($scope, $http, $location, localStorageService, appConfig){
 
   $scope.users = [];
 
   $http({
     method: 'GET',
-    url: 'http://localhost:3000/api/users',
+    url: appConfig().endpoint+'/api/users',
     headers: {
       Authorization: 'Token token="'+localStorageService.get('token')+'", email="'+localStorageService.get('email')+'"'
     }
@@ -20,7 +20,7 @@ angular.module('app')
   $scope.deleteUser = function(user_id) {
     $http({
       method: 'DELETE',
-      url: 'http://localhost:3000/api/users/'+user_id,
+      url: appConfig().endpoint+'/api/users/'+user_id,
       headers: {
         Authorization: 'Token token="'+localStorageService.get('token')+'", email="'+localStorageService.get('email')+'"'
       }

@@ -23,6 +23,7 @@
   <script src="javascripts/app.module.js"></script>
   <script src="javascripts/app.config.js"></script>
   <script src="javascripts/app.router.js"></script>
+  <script src="javascripts/app.config.service.js"></script>
   <script src="javascripts/app.user.factory.js"></script>
   <script src="javascripts/app.trip.factory.js"></script>
   <script src="javascripts/directive.back.js"></script>
@@ -54,6 +55,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li ng-show="isAuthenticated()"><div class="navbar-text">{{email()}}</div></li>
         <li><a href="#/login" ng-show="isGuest()">Login</a></li>
+        <li><a href="#/register" ng-show="isGuest()">register</a></li>
         <li><a ng-click="logout()" ng-show="isAuthenticated()">Logout</a></li>
       </ul>
     </div>

@@ -1,12 +1,12 @@
 angular.module('app')
-.controller('sessionController', function($scope, $http, $location, localStorageService) {
+.controller('sessionController', function($scope, $http, $location, localStorageService, appConfig) {
 
   $scope.user = {};
 
   $scope.loginProcess = function(){
     $http({
       method: 'POST',
-      url: 'http://localhost:3000/api/sessions',
+      url: appConfig().endpoint+'/api/sessions',
       data: {
         user: $scope.user
       }

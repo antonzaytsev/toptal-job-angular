@@ -1,11 +1,11 @@
 angular.module('app')
-.controller('userNewController', function($scope, $http, localStorageService) {
+.controller('userNewController', function($scope, $http, $location, localStorageService, appConfig) {
 
   $scope.email = '';
   $scope.password = '';
 
   $scope.registerProcess = function(){
-    $http.post('http://localhost:3000/api/users', {
+    $http.post(appConfig().endpoint+'/api/users', {
       'user': {
         email: $scope.email,
         password: $scope.password
@@ -15,7 +15,7 @@ angular.module('app')
       localStorageService.set('email', user.email);
       localStorageService.set('token', user.token);
       localStorageService.set('role', user.role);
-      alert('Account created')
+      $location.path('/trips')
     }, function(response){
       alert('Email or password are incorrect')
     })

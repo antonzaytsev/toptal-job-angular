@@ -1,37 +1,29 @@
 angular.module('app')
-.controller('tripsController', ['$scope', '$http', '$location', 'localStorageService', 'Trip', function($scope, $http, $location, localStorageService, Trip) {
+.controller('tripsController', function($scope, $http, $location, localStorageService, appConfig) {
 
   $scope.trips = [];
-
-  //$http.defaults.headers.common['Authorization'] = 'Token token="'+localStorageService.get('token')+'", email="'+localStorageService.get('email')+'"'
-  //Trip.query(function(data){
-  //  $scope.trips = data;
-  //});
 
   $scope.filter = 'upcoming';
   $scope.searchTripDestination = '';
 
   $http({
     method: 'GET',
-    url: 'http://localhost:3000/api/trips',
+    url: appConfig().endpoint+'/api/trips',
     headers: {
       Authorization: 'Token token="'+localStorageService.get('token')+'", email="'+localStorageService.get('email')+'"'
     }
   }).then(function(response){
-    console.log(response);
     $scope.trips = response.data;
   }, function(response){
     if (response.status == 401) {
       $location.url('/login')
     }
-
-    console.log(arguments);
   });
 
   $scope.deleteTrip = function(trip_id){
     $http({
       method: 'DELETE',
-      url: 'http://localhost:3000/api/trips/'+trip_id,
+      url: appConfig().endpoint+'/api/trips/'+trip_id,
       headers: {
         Authorization: 'Token token="'+localStorageService.get('token')+'", email="'+localStorageService.get('email')+'"'
       }
@@ -45,8 +37,6 @@ angular.module('app')
       if (response.status == 401) {
         $location.url('/login')
       }
-
-      console.log(arguments);
     });
   }
 
@@ -57,6 +47,12 @@ angular.module('app')
     else if ($scope.filter == 'past') {
       return new Date > new Date(value.start_date)
     }
+    else if ($scope.filter == 'next_month') {
+      var future = new Date();
+      future.setDate(future.getDate() + 30);
+      var date = new Date(value.start_date);
+      return new Date() <= date && future >= date
+    }
     else {
       return true
     }
@@ -66,4 +62,4 @@ angular.module('app')
     $scope.filter = f;
   }
 
-}]);
+});
