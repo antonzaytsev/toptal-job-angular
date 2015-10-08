@@ -34,8 +34,6 @@ angular.module('app')
       if (response.status == 401) {
         $location.url('/login')
       }
-
-      console.log(arguments);
     });
   }
 

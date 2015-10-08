@@ -9,7 +9,6 @@ angular.module('app')
       Authorization: 'Token token="'+localStorageService.get('token')+'", email="'+localStorageService.get('email')+'"'
     }
   }).then(function(response){
-    console.log(response);
     $scope.trip = response.data.trip
   });
 
@@ -24,15 +23,12 @@ angular.module('app')
         trip: $scope.trip
       }
     }).then(function(response){
-      console.log(response);
       $location.url('/trips');
       //$scope.todos = res.data;
     }, function(response){
       if (response.status == 401) {
         $location.url('/login')
       }
-
-      console.log(arguments);
     });
   }
 });

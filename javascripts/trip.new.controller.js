@@ -13,14 +13,11 @@ angular.module('app')
         trip: $scope.trip
       }
     }).then(function(response){
-      console.log(response);
       $location.url('/trips');
     }, function(response){
       if (response.status == 401) {
         $location.url('/login')
       }
-
-      console.log(arguments);
     });
   }
 });

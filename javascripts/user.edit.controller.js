@@ -9,15 +9,11 @@ angular.module('app')
       Authorization: 'Token token="'+localStorageService.get('token')+'", email="'+localStorageService.get('email')+'"'
     }
   }).then(function(response){
-    console.log(response);
     $scope.user = response.data.user;
-    console.log($scope.user);
   }, function(response) {
     if (response.status == 401) {
       $location.url('/login')
     }
-
-    console.log(arguments);
   });
 
   $scope.updateUser = function(){
