@@ -2,7 +2,10 @@ angular.module('app')
 .controller('mainController', function($scope, $location, localStorageService) {
   $scope.email = function() {
     return localStorageService.get('email');
-  }
+  };
+  $scope.profileEdit = function(){
+    return "#/users/"+localStorageService.set('id', user.id)+"/edit"
+  };
   $scope.logout = function(){
     localStorageService.remove('token');
     localStorageService.remove('email');

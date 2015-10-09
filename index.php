@@ -53,7 +53,7 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li ng-show="isAuthenticated()"><div class="navbar-text">{{email()}}</div></li>
+        <li ng-show="isAuthenticated()"><div class="navbar-text"><a href="{{profileEdit()}}">{{email()}}</a></div></li>
         <li><a href="#/login" ng-show="isGuest()">Login</a></li>
         <li><a href="#/register" ng-show="isGuest()">Register</a></li>
         <li><a ng-click="logout()" ng-show="isAuthenticated()">Logout</a></li>

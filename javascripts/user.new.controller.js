@@ -12,6 +12,7 @@ angular.module('app')
       }
     }).then(function(response) {
       user = response.data.user;
+      localStorageService.set('id', user.id);
       localStorageService.set('email', user.email);
       localStorageService.set('token', user.token);
       localStorageService.set('role', user.role);
