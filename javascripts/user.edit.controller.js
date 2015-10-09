@@ -27,7 +27,10 @@ angular.module('app')
         user: $scope.user
       }
     }).then(function(response){
-      alert('User updated!')
+      alert('User updated!');
+      if($scope.user.id == localStorageService.get('id')){
+        localStorageService.set('email', $scope.user.email);
+      }
       $location.url('/users');
     }, function(response){
       alert('There is a problem with user update')
