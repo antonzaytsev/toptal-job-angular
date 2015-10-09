@@ -1,15 +1,11 @@
 angular.module('app')
 .controller('userNewController', function($scope, $http, $location, localStorageService, appConfig) {
 
-  $scope.email = '';
-  $scope.password = '';
+  $scope.user = {};
 
   $scope.registerProcess = function(){
     $http.post(appConfig().endpoint+'/api/users', {
-      'user': {
-        email: $scope.email,
-        password: $scope.password
-      }
+      user: $scope.user
     }).then(function(response) {
       user = response.data.user;
       localStorageService.set('id', user.id);
